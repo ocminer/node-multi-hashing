@@ -13,6 +13,7 @@ extern "C" {
     #include "skein.h"
     #include "x11.h"
     #include "groestl.h"
+    #include "pluck.h"
     #include "blake.h"
     #include "fugue.h"
     #include "qubit.h"
