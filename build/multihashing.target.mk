@@ -91,6 +91,7 @@ OBJS := \
 	$(obj).target/$(TARGET)/x15.o \
 	$(obj).target/$(TARGET)/fresh.o \
 	$(obj).target/$(TARGET)/neoscrypt.o \
+	$(obj).target/$(TARGET)/pluck.o \
 	$(obj).target/$(TARGET)/sha3/sph_hefty1.o \
 	$(obj).target/$(TARGET)/sha3/sph_fugue.o \
 	$(obj).target/$(TARGET)/sha3/aes_helper.o \

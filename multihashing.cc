@@ -643,7 +643,7 @@ void init(Handle<Object> exports) {
     exports->Set(String::NewSymbol("x15"), FunctionTemplate::New(x15)->GetFunction());
     exports->Set(String::NewSymbol("fresh"), FunctionTemplate::New(fresh)->GetFunction());
     exports->Set(String::NewSymbol("neoscrypt"), FunctionTemplate::New(neoscrypt_hash)->GetFunction());
-    exports->Set(String::NewSymbol("pluck"), FunctionTemplate::New(pluck_hash)->GetFunction());
+    exports->Set(String::NewSymbol("pluck"), FunctionTemplate::New(pluck)->GetFunction());
 }
 
 NODE_MODULE(multihashing, init)
