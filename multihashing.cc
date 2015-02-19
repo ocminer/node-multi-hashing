@@ -10,6 +10,7 @@ extern "C" {
     #include "scryptjane.h"
     #include "scryptn.h"
     #include "neoscrypt.h"
+    #include "pluck.h"
     #include "skein.h"
     #include "x11.h"
     #include "groestl.h"
@@ -52,6 +53,28 @@ Handle<Value> quark(const Arguments& args) {
     uint32_t input_len = Buffer::Length(target);
 
     quark_hash(input, output, input_len);
+
+    Buffer* buff = Buffer::New(output, 32);
+    return scope.Close(buff->handle_);
+}
+
+Handle<Value> pluck(const Arguments& args) {
+    HandleScope scope;
+
+    if (args.Length() < 1)
+        return except("You must provide one argument.");
+
+    Local<Object> target = args[0]->ToObject();
+
+    if(!Buffer::HasInstance(target))
+        return except("Argument should be a buffer object.");
+
+    char * input = Buffer::Data(target);
+    char output[32];
+
+    uint32_t input_len = Buffer::Length(target);
+
+    pluck_hash(input, output);
 
     Buffer* buff = Buffer::New(output, 32);
     return scope.Close(buff->handle_);
@@ -620,6 +643,7 @@ void init(Handle<Object> exports) {
     exports->Set(String::NewSymbol("x15"), FunctionTemplate::New(x15)->GetFunction());
     exports->Set(String::NewSymbol("fresh"), FunctionTemplate::New(fresh)->GetFunction());
     exports->Set(String::NewSymbol("neoscrypt"), FunctionTemplate::New(neoscrypt_hash)->GetFunction());
+    exports->Set(String::NewSymbol("pluck"), FunctionTemplate::New(pluck_hash)->GetFunction());
 }
 
 NODE_MODULE(multihashing, init)
